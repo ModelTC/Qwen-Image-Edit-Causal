@@ -11,7 +11,7 @@ We employ block causal attention to improve inference speed of [Qwen-Image-Edit-
 ## 📑 Todo List
 
 * [x] Qwen-Image-Edit-Causal
-* [] Qwen-Image-Edit-Interactive (multi-turn edit)
+* [ ] Qwen-Image-Edit-Interactive (multi-turn edit)
 
 
 
@@ -40,7 +40,6 @@ huggingface-cli download lightx2v/Qwen-Image-Edit-Causal --local-dir ./Qwen-Imag
 ### Run Qwen-Image-Edit-Causal Model
 
 ``` sh
-# 8 steps, cfg 1.0
 python generate_with_diffusers.py \
 --model_name lightx2v/Qwen-Image-Edit-Causal \
 --prompt_list_file examples/prompt_list.txt \
