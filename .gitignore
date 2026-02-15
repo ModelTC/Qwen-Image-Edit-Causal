@@ -1,0 +1,7 @@
+*__pycache__
+
+# pretrained models
+Qwen-Image-Edit-Causal/
+
+# results
+results/
