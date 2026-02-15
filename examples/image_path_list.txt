@@ -1,0 +1,6 @@
+./examples/images/qwen_image_edit_causal_1_1.webp ./examples/images/qwen_image_edit_causal_1_2.webp ./examples/images/qwen_image_edit_causal_1_3.webp
+./examples/images/qwen_image_edit_causal_2_1.jpg ./examples/images/qwen_image_edit_causal_2_2.jpg
+./examples/images/qwen_image_edit_causal_3_1.png
+./examples/images/qwen_image_edit_causal_4_1.webp
+./examples/images/qwen_image_edit_causal_5_1.webp
+./examples/images/qwen_image_edit_causal_6_1.webp ./examples/images/qwen_image_edit_causal_6_2.webp ./examples/images/qwen_image_edit_causal_6_3.webp
