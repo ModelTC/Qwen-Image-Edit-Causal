@@ -91,9 +91,9 @@ if __name__ == "__main__":
     )
     parser.add_argument("--out_dir", type=str, default="results")
     parser.add_argument("--lora_path", type=str, default=None)
-    parser.add_argument("--base_seed", type=int, default=42)
+    parser.add_argument("--base_seed", type=int, default=0)
     parser.add_argument(
-        "--model_name", type=str, default="Lightx2v/Qwen-Image-Edit-Causal"
+        "--model_name", type=str, default="lightx2v/Qwen-Image-Edit-Causal"
     )
     parser.add_argument("--steps", type=int, default=4)
     parser.add_argument("--cfg", type=float, default=1)

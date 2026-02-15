@@ -1,9 +1,9 @@
-# QQwen-Image-Edit-Causal
+# Qwen-Image-Edit-Causal
 
 We employ block causal attention to improve inference speed of [Qwen-Image-Edit-2511](https://huggingface.co/Qwen/Qwen-Image-Edit-2511).
 
 ## 🔥 Latest News
-* Jan 01, 2026: 👋 Release [Qwen-Image-Edit-Causal-V1.0](https://huggingface.co/lightx2v/Qwen-Image-2512-Lightning/blob/main/Qwen-Image-2512-Lightning-4steps-V1.0-fp32.safetensors).
+* Jan 01, 2026: 👋 Release [Qwen-Image-Edit-Causal-V1.0](https://huggingface.co/lightx2v/Qwen-Image-Edit-Causal).
 
 
 
@@ -19,23 +19,24 @@ We employ block causal attention to improve inference speed of [Qwen-Image-Edit-
 
 ### Installation
 
-Install python environment with [UV](https://github.com/astral-sh/uv)
+Install python environment with [uv](https://github.com/astral-sh/uv)
 
 ```sh
 git clone https://github.com/ModelTC/Qwen-Image-Edit-Causal.git
 cd Qwen-Image-Edit-Causal
 uv venv
 uv sync
+source .venv/bin/activate
 ```
 
-### Model Download
+<!-- ### Model Download
 
-Download models using huggingface-cli:
+Download models using huggingface-cli: -->
 
-``` sh
+<!-- ``` sh
 pip install "huggingface_hub[cli]"
 huggingface-cli download lightx2v/Qwen-Image-Edit-Causal --local-dir ./Qwen-Image-Edit-Causal
-```
+``` -->
 
 ### Run Qwen-Image-Edit-Causal Model
 
@@ -51,7 +52,7 @@ python generate_with_diffusers.py \
 
 ## License Agreement
 
-The models in this repository are licensed under the Apache 2.0 License. We claim no rights over your generated contents, granting you the freedom to use them while ensuring that your usage complies with the provisions of this license. You are fully accountable for your use of the models, which must not involve sharing any content that violates applicable laws, causes harm to individuals or groups, disseminates personal information intended for harm, spreads misinformation, or targets vulnerable populations. For a complete list of restrictions and details regarding your rights, please refer to the full text of the [license](LICENSE.txt).
+The models in this repository are licensed under the Apache 2.0 License. We claim no rights over your generated contents, granting you the freedom to use them while ensuring that your usage complies with the provisions of this license. You are fully accountable for your use of the models, which must not involve sharing any content that violates applicable laws, causes harm to individuals or groups, disseminates personal information intended for harm, spreads misinformation, or targets vulnerable populations. For a complete list of restrictions and details regarding your rights, please refer to the full text of the [license](LICENSE).
 
 ## Acknowledgements
 
