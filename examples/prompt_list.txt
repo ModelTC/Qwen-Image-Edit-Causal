@@ -1,0 +1,6 @@
+Make the girl from Image 1 wear the necklace from Image 2 and carry the bag from Image 3 on her left shoulder.
+The monk in the Image 1 and The woman in the Image 2 are standing close, holding hands, suggesting a moment of connection or intimacy. They appear to be in a grand hall with ornate lighting and decorations, indicating a formal or celebratory setting. The shot size is medium, capturing both characters from the waist up, allowing for a clear view of their expressions and upper body gestures.
+Change the character's hair color from blonde to white, and add a hard side light coming from the right side of the image, so the shadows on the left half of the face become more pronounced.
+将图中的人物改为日漫风格，并给图片添加文字“使用Lightx2V Qwen-Image-Lightning 加速图像生成和图片编辑”。
+Generate an image that matches the depth map, following this description: A dilapidated red bicycle is parked on a muddy path with a dense primeval forest in the background.
+Make the girl from Image 1 wear the black dress from Image 2 and sit in the pose from Image 3.
