@@ -3,7 +3,7 @@
 We employ block causal attention to improve inference speed of [Qwen-Image-Edit-2511](https://huggingface.co/Qwen/Qwen-Image-Edit-2511).
 
 ## 🔥 Latest News
-* Jan 01, 2026: 👋 Release [Qwen-Image-Edit-Causal-V1.0](https://huggingface.co/lightx2v/Qwen-Image-Edit-Causal).
+* Feb 15, 2026: 👋 Release [Qwen-Image-Edit-Causal-V1.0](https://huggingface.co/lightx2v/Qwen-Image-Edit-Causal).
 
 
 
