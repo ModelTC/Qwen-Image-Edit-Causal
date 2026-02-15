@@ -165,6 +165,11 @@ class QwenDoubleStreamAttnProcessorCausal2_0:
                 dim=1,
             )
 
+        if attention_mask is not None and bool(
+            attention_mask.sum() == attention_mask.numel()
+        ):
+            attention_mask = None
+
         # Compute joint attention
         joint_hidden_states = dispatch_attention_fn(
             joint_query,
