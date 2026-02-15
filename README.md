@@ -17,7 +17,7 @@ We employ block causal attention to improve inference speed of [Qwen-Image-Edit-
 ## 📑 Methodology
 The figure below illustrates the core design of `Qwen-Image-Edit-Causal`: reference-image queries attend only to their own keys and values, which reduces training-time computation and decouples the attention of referenece images from the number of inference steps.
 
-![Qwen-Image-Edit-Causal](src/images/qwen_image_edit_causal.png)
+![Qwen-Image-Edit-Causal](assets/qwen_image_edit_causal.png)
 
 
 ## 📑 Performance Reports
