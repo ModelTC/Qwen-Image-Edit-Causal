@@ -19,6 +19,7 @@ from diffusers.models.attention_dispatch import dispatch_attention_fn
 from diffusers.models.attention_processor import Attention
 from diffusers.models.transformers.transformer_qwenimage import (
     QwenImageTransformer2DModel,
+    QwenImageTransformerBlock,
     apply_rotary_emb_qwen,
 )
 from diffusers.utils import logging
@@ -104,7 +105,7 @@ class QwenDoubleStreamAttnProcessor2_0:
             attention_mask.sum() == attention_mask.numel()
         ):
             attention_mask = None
-            # SDPA is slow when mask is not None
+            # SDPA is slow when attention_mask is not None
 
         joint_hidden_states = dispatch_attention_fn(
             joint_query,
@@ -166,4 +167,5 @@ class QwenImageTransformer2DModelFixSpeed(QwenImageTransformer2DModel):
             use_layer3d_rope,
         )
         for block in self.transformer_blocks:
+            block: QwenImageTransformerBlock
             block.attn.set_processor(QwenDoubleStreamAttnProcessor2_0())

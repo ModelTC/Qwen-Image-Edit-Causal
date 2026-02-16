@@ -191,7 +191,8 @@ def main(
 
     for i in range(3):
         cost_list = []
-        for repeat in range(3):
+        repeat = 10
+        for _ in range(repeat):
             image_list = [
                 Image.new("RGB", (1024, 1024), color="white") for _ in range(i + 1)
             ]
