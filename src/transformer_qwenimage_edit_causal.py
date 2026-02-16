@@ -153,17 +153,18 @@ class QwenDoubleStreamAttnProcessorCausal2_0:
             joint_key = torch.cat([img_key, txt_key], dim=1)
             joint_value = torch.cat([img_value, txt_value], dim=1)
 
-            attention_mask = torch.cat(
-                [
-                    torch.ones(
-                        (batchsize, cache_length),
-                        dtype=torch.bool,
-                        device=attention_mask.device,
-                    ),
-                    attention_mask,
-                ],
-                dim=1,
-            )
+            if attention_mask is not None:
+                attention_mask = torch.cat(
+                    [
+                        torch.ones(
+                            (batchsize, cache_length),
+                            dtype=torch.bool,
+                            device=attention_mask.device,
+                        ),
+                        attention_mask,
+                    ],
+                    dim=1,
+                )
 
         if attention_mask is not None and bool(
             attention_mask.sum() == attention_mask.numel()
