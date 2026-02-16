@@ -24,7 +24,7 @@ The figure below illustrates the core design of `Qwen-Image-Edit-Causal`: refere
 
 ### Speed Test 
 
-The test enviroment: H100 GPU, SDPA attention backend. Please refer to [Run Speed Test](#run-speed-test) to reproduce the results.
+The test enviroment: H100 GPU, SDPA attention backend. All tests are conducted with image size fixed at **1024 x 1024**. Please refer to [Run Speed Test](#run-speed-test) to reproduce the results.
 
 | Method | 1 Ref Img | 2 Ref Img | 3 Ref Img |
 |:-----:|:-----:|:-----:|:-----:|
