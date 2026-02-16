@@ -24,17 +24,10 @@ if is_torch_xla_available():
 else:
     XLA_AVAILABLE = False
 
-from .transformer_qwenimage_edit_causal import (
-    KVCache,
-    QwenImageTransformerCausal2DModel,
-)
-
 logger = logging.get_logger(__name__)  # pylint: disable=invalid-name
 
 
-class QwenImageEditPlusCausalPipeline(QwenImageEditPlusPipeline):
-    transformer: QwenImageTransformerCausal2DModel
-
+class QwenImageEditPlusPipelineForBench(QwenImageEditPlusPipeline):
     @torch.no_grad()
     @replace_example_docstring(EXAMPLE_DOC_STRING)
     def __call__(
@@ -340,76 +333,10 @@ class QwenImageEditPlusCausalPipeline(QwenImageEditPlusPipeline):
             if negative_prompt_embeds_mask is not None
             else None
         )
-        max_txt_seq_len = (
-            int(max(txt_seq_lens))
-            if txt_seq_lens is not None
-            else int(prompt_embeds.shape[1])
-        )
-        vid_rope_emb, txt_rope_emb = self.transformer.pos_embed(
-            img_shapes,
-            txt_seq_lens=txt_seq_lens,
-            max_txt_seq_len=max_txt_seq_len,
-            device=device,
-        )
-        if do_true_cfg:
-            negative_max_txt_seq_len = (
-                int(max(negative_txt_seq_lens))
-                if negative_txt_seq_lens is not None
-                else int(negative_prompt_embeds.shape[1])
-            )
-            _, negative_txt_rope_emb = self.transformer.pos_embed(
-                img_shapes,
-                txt_seq_lens=negative_txt_seq_lens,
-                max_txt_seq_len=negative_max_txt_seq_len,
-                device=device,
-            )
-
-        ref_prompt_mask = prompt_embeds_mask
-        if ref_prompt_mask is None:
-            ref_prompt_mask = torch.ones(
-                (prompt_embeds.shape[0], prompt_embeds.shape[1]),
-                dtype=torch.bool,
-                device=device,
-            )
-
-        tgt_image_tokens = int(np.prod(img_shapes[0][0]))
-
-        # replace the reference rope embedding with the target rope embedding
-        vid_rope_emb = torch.cat(
-            [vid_rope_emb[tgt_image_tokens:], vid_rope_emb[:tgt_image_tokens]]
-        )
 
         # 6. Denoising loop
         self.scheduler.set_begin_index(0)
-
-        kv_cache = [KVCache() for _ in range(self.transformer.config.num_layers)]
-
         t0 = time()
-
-        for ref_idx, ref_img_shape in enumerate(img_shapes[0][1:]):
-            timestep = torch.zeros((latents.shape[0],), device=device)
-            ref_token_length = np.prod(ref_img_shape)
-            # roll out rope embedding
-            cur_vid_freqs = vid_rope_emb[:ref_token_length]
-            vid_rope_emb = vid_rope_emb[ref_token_length:]
-
-            # roll out reference latent embedding
-            cur_image_latent = image_latents[:, :ref_token_length]
-            image_latents = image_latents[:, ref_token_length:]
-
-            # write kv cache
-            self.transformer(
-                hidden_states=cur_image_latent,
-                kv_cache=kv_cache,
-                is_ref=True,
-                image_rotary_emb=(cur_vid_freqs, None),
-                timestep=timestep,
-                encoder_hidden_states_mask=ref_prompt_mask[:, 0:0],
-                encoder_hidden_states=prompt_embeds[:, 0:0],
-                attention_kwargs=self.attention_kwargs,
-                return_dict=False,
-            )
-
         with self.progress_bar(total=num_inference_steps) as progress_bar:
             for i, t in enumerate(timesteps):
                 if self.interrupt:
@@ -418,18 +345,20 @@ class QwenImageEditPlusCausalPipeline(QwenImageEditPlusPipeline):
                 self._current_timestep = t
 
                 latent_model_input = latents
+                if image_latents is not None:
+                    latent_model_input = torch.cat([latents, image_latents], dim=1)
 
                 # broadcast to batch dimension in a way that's compatible with ONNX/Core ML
-                timestep = t.expand(latents.shape[0]).to(device)
+                timestep = t.expand(latents.shape[0]).to(latents.dtype)
                 with self.transformer.cache_context("cond"):
                     noise_pred = self.transformer(
                         hidden_states=latent_model_input,
-                        kv_cache=kv_cache,
-                        is_ref=False,
-                        image_rotary_emb=(vid_rope_emb, txt_rope_emb),
                         timestep=timestep / 1000,
+                        guidance=guidance,
                         encoder_hidden_states_mask=prompt_embeds_mask,
                         encoder_hidden_states=prompt_embeds,
+                        img_shapes=img_shapes,
+                        txt_seq_lens=txt_seq_lens,
                         attention_kwargs=self.attention_kwargs,
                         return_dict=False,
                     )[0]
@@ -439,12 +368,12 @@ class QwenImageEditPlusCausalPipeline(QwenImageEditPlusPipeline):
                     with self.transformer.cache_context("uncond"):
                         neg_noise_pred = self.transformer(
                             hidden_states=latent_model_input,
-                            kv_cache=kv_cache,
-                            is_ref=False,
-                            image_rotary_emb=(vid_rope_emb, negative_txt_rope_emb),
                             timestep=timestep / 1000,
+                            guidance=guidance,
                             encoder_hidden_states_mask=negative_prompt_embeds_mask,
                             encoder_hidden_states=negative_prompt_embeds,
+                            img_shapes=img_shapes,
+                            txt_seq_lens=negative_txt_seq_lens,
                             attention_kwargs=self.attention_kwargs,
                             return_dict=False,
                         )[0]
@@ -486,6 +415,7 @@ class QwenImageEditPlusCausalPipeline(QwenImageEditPlusPipeline):
                 if XLA_AVAILABLE:
                     xm.mark_step()
         t1 = time()
+
         self._current_timestep = None
         if output_type == "latent":
             image = latents
@@ -511,6 +441,7 @@ class QwenImageEditPlusCausalPipeline(QwenImageEditPlusPipeline):
 
         if return_dit_cost:
             return t1 - t0
+
         if not return_dict:
             return (image,)
 
