@@ -24,6 +24,62 @@ The figure below illustrates the core design of `Qwen-Image-Edit-Causal`: refere
 
 We compare the performance of `Qwen-Image-Edit-Causal` and `Qwen-Image-Edit-2511`.
 
+
+<table>
+  <thead>
+    <tr>
+      <th width="480" text-align="center">Method</th>
+      <th width="220" text-align="center">1 Ref Img</th>
+      <th width="220" text-align="center">2 Ref Img</th>
+      <th width="220" text-align="center">3 Ref Img</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td text-align="center">
+        Qwen-Image-Edit-2511 80 NFE
+      </td>
+      <td text-align="center">
+        1 s
+      </td>
+      <td text-align="center">
+        2 s
+      </td> 
+      <td text-align="center">
+        3 s
+      </td> 
+    </tr>
+    <tr>
+      <td text-align="center">
+        Qwen-Image-Edit-2511-Lightning 4 NFE
+      </td>
+      <td text-align="center">
+        3.007 s
+      </td>
+      <td text-align="center">
+        5.805 s
+      </td> 
+      <td text-align="center">
+        9.303 s
+      </td> 
+    </tr>
+    <tr>
+      <td text-align="center">
+        Qwen-Image-Edit-Causal 4 NFE
+      </td>
+      <td text-align="center">
+        1.441 s
+      </td>
+      <td text-align="center">
+        1.902 s
+      </td> 
+      <td text-align="center">
+        2.357 s
+      </td> 
+    </tr>
+  </tbody>
+</table>
+
 <table>
   <thead>
     <tr>

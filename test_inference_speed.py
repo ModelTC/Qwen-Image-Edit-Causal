@@ -5,13 +5,11 @@ from contextlib import contextmanager
 import torch
 import torch.nn as nn
 from diffusers import FlowMatchEulerDiscreteScheduler
-from diffusers.models.transformers.transformer_qwenimage import (
-    QwenImageTransformer2DModel,
-)
 from PIL import Image
 
 from src.pipeline_qwenimage_edit_plus import QwenImageEditPlusPipelineForBench
 from src.pipeline_qwenimage_edit_plus_causal import QwenImageEditPlusCausalPipeline
+from src.transformer_qwenimage import QwenImageTransformer2DModelFixSpeed
 from src.transformer_qwenimage_edit_causal import QwenImageTransformerCausal2DModel
 
 
@@ -160,7 +158,7 @@ def main(
         model_cls = QwenImageTransformerCausal2DModel
         pipe_cls = QwenImageEditPlusCausalPipeline
     else:
-        model_cls = QwenImageTransformer2DModel
+        model_cls = QwenImageTransformer2DModelFixSpeed
         pipe_cls = QwenImageEditPlusPipelineForBench
 
     with init_empty_weights(include_buffers=False):
@@ -193,7 +191,7 @@ def main(
 
     for i in range(3):
         cost_list = []
-        for repeat in range(10):
+        for repeat in range(3):
             image_list = [
                 Image.new("RGB", (1024, 1024), color="white") for _ in range(i + 1)
             ]
