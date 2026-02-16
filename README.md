@@ -66,7 +66,7 @@ python generate_with_diffusers.py \
 --prompt_list_file examples/prompt_list.txt \
 --image_path_list_file examples/image_path_list.txt \
 --out_dir results/Qwen-Image-Edit-Causal \
---base_seed 42 --steps 4 --cfg 1.0
+--base_seed 0 --steps 4 --cfg 1.0
 ```
 
 
