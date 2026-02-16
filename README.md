@@ -29,52 +29,52 @@ The test enviroment: H100 GPU, SDPA attention backend. Please refer to [Run Spee
 <table>
   <thead>
     <tr>
-      <th width="480" text-align="center">Method</th>
-      <th width="220" text-align="center">1 Ref Img</th>
-      <th width="220" text-align="center">2 Ref Img</th>
-      <th width="220" text-align="center">3 Ref Img</th>
+      <th width="480" style="text-align: center">Method</th>
+      <th width="220" style="text-align: center">1 Ref Img</th>
+      <th width="220" style="text-align: center">2 Ref Img</th>
+      <th width="220" style="text-align: center">3 Ref Img</th>
     </tr>
   </thead>
   <tbody>
     <tr>
-      <td text-align="center">
+      <td style="text-align: center">
         Qwen-Image-Edit-2511 80 NFE
       </td>
-      <td text-align="center">
+      <td style="text-align: center">
         37.001 s
       </td>
-      <td text-align="center">
+      <td style="text-align: center">
         63.300 s
       </td> 
-      <td text-align="center">
+      <td style="text-align: center">
         93.586 s
       </td> 
     </tr>
     <tr>
-      <td text-align="center">
+      <td style="text-align: center">
         Qwen-Image-Edit-2511-Lightning 4 NFE
       </td>
-      <td text-align="center">
+      <td style="text-align: center">
         1.847 s
       </td>
-      <td text-align="center">
+      <td style="text-align: center">
         3.160 s
       </td> 
-      <td text-align="center">
+      <td style="text-align: center">
         4.664 s
       </td> 
     </tr>
     <tr>
-      <td text-align="center">
+      <td style="text-align: center">
         <b>Qwen-Image-Edit-Causal 4 NFE</b>
       </td>
-      <td text-align="center">
+      <td style="text-align: center">
         1.274 s
       </td>
-      <td text-align="center">
+      <td style="text-align: center">
         1.684 s
       </td> 
-      <td text-align="center">
+      <td style="text-align: center">
         2.088 s
       </td> 
     </tr>
