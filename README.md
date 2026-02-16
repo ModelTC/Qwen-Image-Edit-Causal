@@ -26,6 +26,14 @@ The figure below illustrates the core design of `Qwen-Image-Edit-Causal`: refere
 
 The test enviroment: H100 GPU, SDPA attention backend. Please refer to [Run Speed Test](#run-speed-test) to reproduce the results.
 
+| Method | 1 Ref Img | 2 Ref Img | 3 Ref Img |
+|:-----:|:-----:|:-----:|:-----:|
+| Qwen-Image-Edit-2511  |  37.001 s  | 63.300 s  |  93.586 s |
+| Qwen-Image-Edit-2511-Lightning  |  1.847 s  | 3.160 s  |   4.664 s |
+| **Qwen-Image-Edit-Causal**  |  **1.274 s**  | **1.684 s**  |  **2.088 s** |
+
+
+<!-- 
 <table>
   <thead>
     <tr>
@@ -79,7 +87,7 @@ The test enviroment: H100 GPU, SDPA attention backend. Please refer to [Run Spee
       </td> 
     </tr>
   </tbody>
-</table>
+</table> -->
 
 ### Quality Comparison
 <table>
