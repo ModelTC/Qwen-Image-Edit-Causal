@@ -28,9 +28,9 @@ The test enviroment: H100 GPU, SDPA attention backend. Please refer to [Run Spee
 
 | Method | 1 Ref Img | 2 Ref Img | 3 Ref Img |
 |:-----:|:-----:|:-----:|:-----:|
-| Qwen-Image-Edit-2511  |  37.001 s  | 63.300 s  |  93.586 s |
-| Qwen-Image-Edit-2511-Lightning  |  1.847 s  | 3.160 s  |   4.664 s |
-| **Qwen-Image-Edit-Causal**  |  **1.274 s**  | **1.684 s**  |  **2.088 s** |
+| Qwen-Image-Edit-2511 80 NFE |  37.001 s  | 63.300 s  |  93.586 s |
+| Qwen-Image-Edit-2511-Lightning 4 NFE |  1.847 s  | 3.160 s  |   4.664 s |
+| **Qwen-Image-Edit-Causal 4 NFE**  |  **1.274 s**  | **1.684 s**  |  **2.088 s** |
 
 
 <!-- 
