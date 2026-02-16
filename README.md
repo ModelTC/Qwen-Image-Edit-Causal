@@ -27,51 +27,51 @@ We compare the performance of `Qwen-Image-Edit-Causal` and `Qwen-Image-Edit-2511
 <table>
   <thead>
     <tr>
-      <th width="300">Input Image</th>
-      <th>Prompt</th>
+      <th width="480">Input Image</th>
+      <th width="120">Prompt</th>
       <th width="56">Case</th>
       <th width="220">Qwen-Image-Edit-2511 40steps</th>
-      <th width="250">Qwen-Image-Edit-Causal 4steps</th>
+      <th width="220">Qwen-Image-Edit-Causal 4steps</th>
     </tr>
   </thead>
   <tbody>
     <tr>
       <td>
         <img src="examples/images/qwen_image_edit_causal_1_1.webp" width="120" />
-        <img src="examples/images/qwen_image_edit_causal_1_2.webp" width="120" /><br>
+        <img src="examples/images/qwen_image_edit_causal_1_2.webp" width="120" />
         <img src="examples/images/qwen_image_edit_causal_1_3.webp" width="120" />
       </td>
       <td>Make the girl from Image 1 wear the necklace from Image 2 and carry the bag from Image 3 on her left shoulder.</td>
       <td align="center">✅</td>
-      <td><img src="examples/images/example1_40steps.jpg" width="180" /></td>
-      <td><img src="examples/images/example1_causal_4steps.jpg" width="180" /></td>
+      <td><img src="examples/images/example1_40steps.jpg" width="200" /></td>
+      <td><img src="examples/images/example1_causal_4steps.jpg" width="200" /></td>
     </tr>
     <tr>
       <td>
-        <img src="examples/images/qwen_image_edit_causal_2_1.jpg" width="120" />
-        <img src="examples/images/qwen_image_edit_causal_2_2.jpg" width="120" />
+        <img src="examples/images/qwen_image_edit_causal_2_1.jpg" width="180" />
+        <img src="examples/images/qwen_image_edit_causal_2_2.jpg" width="180" />
       </td>
       <td>The monk in the Image 1 and The woman in the Image 2 are standing close, holding hands, suggesting a moment of connection or intimacy. They appear to be in a grand hall with ornate lighting and decorations, indicating a formal or celebratory setting. The shot size is medium, capturing both characters from the waist up, allowing for a clear view of their expressions and upper body gestures.</td>
       <td align="center">✅</td>
-      <td><img src="examples/images/example2_40steps.jpg" width="180" /></td>
-      <td><img src="examples/images/example2_causal_4steps.jpg" width="180" /></td>
+      <td><img src="examples/images/example2_40steps.jpg" width="200" /></td>
+      <td><img src="examples/images/example2_causal_4steps.jpg" width="200" /></td>
     </tr>
     <tr>
-      <td><img src="examples/images/qwen_image_edit_causal_3_1.png" width="120" /></td>
+      <td><img src="examples/images/qwen_image_edit_causal_3_1.png" width="180" /></td>
       <td>Change the character's hair color from blonde to white, and add a hard side light coming from the right side of the image, so the shadows on the left half of the face become more pronounced.</td>
       <td align="center">✅</td>
       <td><img src="examples/images/example3_40steps.jpg" width="180" /></td>
       <td><img src="examples/images/example3_causal_4steps.jpg" width="180" /></td>
     </tr>
     <tr>
-      <td><img src="examples/images/qwen_image_edit_causal_4_1.webp" width="120" /></td>
+      <td><img src="examples/images/qwen_image_edit_causal_4_1.webp" width="180" /></td>
       <td>将图中的人物改为日漫风格，并给图片添加文字“使用Lightx2V Qwen-Image-Lightning 加速图像生成和图片编辑”。</td>
       <td align="center">✅</td>
       <td><img src="examples/images/example4_40steps.jpg" width="180" /></td>
       <td><img src="examples/images/example4_causal_4steps.jpg" width="180" /></td>
     </tr>
     <tr>
-      <td><img src="examples/images/qwen_image_edit_causal_5_1.webp" width="120" /></td>
+      <td><img src="examples/images/qwen_image_edit_causal_5_1.webp" width="180" /></td>
       <td>Generate an image that matches the depth map, following this description: A dilapidated red bicycle is parked on a muddy path with a dense primeval forest in the background.</td>
       <td align="center">✅</td>
       <td><img src="examples/images/example5_40steps.jpg" width="180" /></td>
@@ -80,7 +80,7 @@ We compare the performance of `Qwen-Image-Edit-Causal` and `Qwen-Image-Edit-2511
     <tr>
       <td>
         <img src="examples/images/qwen_image_edit_causal_6_1.webp" width="120" />
-        <img src="examples/images/qwen_image_edit_causal_6_2.webp" width="120" /><br>
+        <img src="examples/images/qwen_image_edit_causal_6_2.webp" width="120" />
         <img src="examples/images/qwen_image_edit_causal_6_3.webp" width="120" />
       </td>
       <td>Make the girl from Image 1 wear the black dress from Image 2 and sit in the pose from Image 3.</td>
