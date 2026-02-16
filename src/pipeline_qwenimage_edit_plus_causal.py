@@ -338,12 +338,36 @@ class QwenImageEditPlusCausalPipeline(QwenImageEditPlusPipeline):
             if negative_prompt_embeds_mask is not None
             else None
         )
+        max_txt_seq_len = (
+            int(max(txt_seq_lens))
+            if txt_seq_lens is not None
+            else int(prompt_embeds.shape[1])
+        )
         vid_rope_emb, txt_rope_emb = self.transformer.pos_embed(
-            img_shapes, txt_seq_lens=txt_seq_lens, device=device
+            img_shapes,
+            txt_seq_lens=txt_seq_lens,
+            max_txt_seq_len=max_txt_seq_len,
+            device=device,
         )
         if do_true_cfg:
+            negative_max_txt_seq_len = (
+                int(max(negative_txt_seq_lens))
+                if negative_txt_seq_lens is not None
+                else int(negative_prompt_embeds.shape[1])
+            )
             _, negative_txt_rope_emb = self.transformer.pos_embed(
-                img_shapes, txt_seq_lens=negative_txt_seq_lens, device=device
+                img_shapes,
+                txt_seq_lens=negative_txt_seq_lens,
+                max_txt_seq_len=negative_max_txt_seq_len,
+                device=device,
+            )
+
+        ref_prompt_mask = prompt_embeds_mask
+        if ref_prompt_mask is None:
+            ref_prompt_mask = torch.ones(
+                (prompt_embeds.shape[0], prompt_embeds.shape[1]),
+                dtype=torch.bool,
+                device=device,
             )
 
         tgt_image_tokens = int(np.prod(img_shapes[0][0]))
@@ -376,7 +400,7 @@ class QwenImageEditPlusCausalPipeline(QwenImageEditPlusPipeline):
                 is_ref=True,
                 image_rotary_emb=(cur_vid_freqs, None),
                 timestep=timestep,
-                encoder_hidden_states_mask=prompt_embeds_mask[:, 0:0],
+                encoder_hidden_states_mask=ref_prompt_mask[:, 0:0],
                 encoder_hidden_states=prompt_embeds[:, 0:0],
                 attention_kwargs=self.attention_kwargs,
                 return_dict=False,
