@@ -22,8 +22,74 @@ The figure below illustrates the core design of `Qwen-Image-Edit-Causal`: refere
 
 ## 📑 Performance Reports
 
-We compare the performance of `Qwen-Image-Edit-Causal` and `Qwen-Image-Edit-2511`.
+### Speed Test 
 
+The test enviroment: H100 GPU, SDPA attention backend. Please refer to [Run Speed Test](#run-speed-test) to reproduce the results.
+
+| Method | 1 Ref Img | 2 Ref Img | 3 Ref Img |
+|:-----:|:-----:|:-----:|:-----:|
+| Qwen-Image-Edit-2511 80 NFE |  37.001 s  | 63.300 s  |  93.586 s |
+| Qwen-Image-Edit-2511-Lightning 4 NFE |  1.847 s  | 3.160 s  |   4.664 s |
+| **Qwen-Image-Edit-Causal 4 NFE**  |  **1.274 s**  | **1.684 s**  |  **2.088 s** |
+
+
+<!-- 
+<table>
+  <thead>
+    <tr>
+      <th width="480" style="text-align: center">Method</th>
+      <th width="220" style="text-align: center">1 Ref Img</th>
+      <th width="220" style="text-align: center">2 Ref Img</th>
+      <th width="220" style="text-align: center">3 Ref Img</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td style="text-align: center">
+        Qwen-Image-Edit-2511 80 NFE
+      </td>
+      <td style="text-align: center">
+        37.001 s
+      </td>
+      <td style="text-align: center">
+        63.300 s
+      </td> 
+      <td style="text-align: center">
+        93.586 s
+      </td> 
+    </tr>
+    <tr>
+      <td style="text-align: center">
+        Qwen-Image-Edit-2511-Lightning 4 NFE
+      </td>
+      <td style="text-align: center">
+        1.847 s
+      </td>
+      <td style="text-align: center">
+        3.160 s
+      </td> 
+      <td style="text-align: center">
+        4.664 s
+      </td> 
+    </tr>
+    <tr>
+      <td style="text-align: center">
+        <b>Qwen-Image-Edit-Causal 4 NFE</b>
+      </td>
+      <td style="text-align: center">
+        1.274 s
+      </td>
+      <td style="text-align: center">
+        1.684 s
+      </td> 
+      <td style="text-align: center">
+        2.088 s
+      </td> 
+    </tr>
+  </tbody>
+</table> -->
+
+### Quality Comparison
 <table>
   <thead>
     <tr>
@@ -125,6 +191,25 @@ python generate_with_diffusers.py \
 --image_path_list_file examples/image_path_list.txt \
 --out_dir results/Qwen-Image-Edit-Causal \
 --base_seed 0 --steps 4 --cfg 1.0
+```
+
+### Run Speed Test
+
+``` sh
+# Qwen-Image-Edit-Causal
+python test_inference_speed.py \
+--model_name lightx2v/Qwen-Image-Edit-Causal \
+--is_causal 1 --steps 4 --cfg 1
+
+# Qwen-Image-Edit-2511-Lightning
+python test_inference_speed.py \
+--model_name Qwen/Qwen-Image-Edit-2511 \
+--is_causal 0 --steps 4 --cfg 1
+
+# Qwen-Image-Edit-2511
+python test_inference_speed.py \
+--model_name Qwen/Qwen-Image-Edit-2511 \
+--is_causal 0 --steps 40 --cfg 4
 ```
 
 
